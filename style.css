@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #2b2a2b;
+    
+}
+
+.container {
+    width: 40%;
+    margin: 5% auto;
+    background:linear-gradient(rgba(255,255,255,0.35), rgba(255,255,255,0.35)),url("https://tse3.mm.bing.net/th/id/OIP.t_VtaD8z6miDhGTM-alMzgHaEt?cb=defcache2&defcache=1&rs=1&pid=ImgDetMain&o=7&rm=3");
+    padding: 20px;
+    border-radius: 8px;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
+
+h2, h3 {
+    text-align: center;
+}
+
+input, select, button {
+    width: 95%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 5px;
+    border: 1px solid #282727;
+}
+
+button {
+    background-color: #341d8a;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-left: 30%;
+    margin-top: 5%;
+    padding:10px;
+    width:40%;
+    
+}
+
+button:hover {
+    background-color: #4944bd;
+}
+
+.issue-card {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
