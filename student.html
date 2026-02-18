@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard - CampusPulse</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Report an Issue</h2>
+
+        <form id="issueForm">
+            <input type="text" id="title" placeholder="Issue Title" required>
+
+            <select id="category">
+                <option value="Water">Water</option>
+                <option value="Electricity">Electricity</option>
+                <option value="Road">Road</option>
+                <option value="Hostel">Hostel</option>
+            </select>
+
+            <select id="severity">
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
+
+            <button type="submit">Submit Issue</button>
+        </form>
+
+        <h3>Submitted Issues</h3>
+        <div id="issueList"></div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
