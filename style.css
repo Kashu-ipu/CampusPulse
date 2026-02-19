@@ -1,8 +1,11 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: Poppins,sans-serif;
     margin: 0;
     padding: 0;
-    background: #2b2a2b;
+    background-image: url("https://image.shutterstock.com/image-vector/dark-blue-vector-polygonal-illustration-260nw-778623541.jpg");
+     background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     
 }
 
@@ -14,7 +17,7 @@ body {
     border-radius: 8px;
     background-size: cover;
     background-position: center;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
 h2, h3 {
@@ -27,7 +30,14 @@ input, select, button {
     margin: 8px 0;
     border-radius: 5px;
     border: 1px solid #282727;
+    font-family: Inter, sans-serif;
 }
+
+input:focus, select:focus {
+    outline: none;
+    border: 2px solid #636262;
+}
+
 
 button {
     background-color: #341d8a;
@@ -43,6 +53,8 @@ button {
 
 button:hover {
     background-color: #4944bd;
+    transform: scale(1.03);
+    transition: 0.3s;
 }
 
 .issue-card {
