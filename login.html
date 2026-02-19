@@ -3,17 +3,19 @@
 <head>
     <title>CampusPulse - Login</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <div class="container">
         <h2>CampusPulse Login</h2>
 
-        <form>
+        <form id="loginForm">
             <input type="text" placeholder="Enter College Email" required>
             <input type="password" placeholder="Enter Password" required>
 
-            <select>
+            <select id="role">
                 <option>Student</option>
                 <option>Admin</option>
             </select>
@@ -21,6 +23,20 @@
             <button type="submit">Login</button>
         </form>
     </div>
+
+    <script>
+document.getElementById("loginForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const role = document.getElementById("role").value;
+
+    if(role === "student"){
+        window.location.href = "student.html";
+    } else {
+        window.location.href = "department.html";
+    }
+});
+</script>
 
 </body>
 </html>
