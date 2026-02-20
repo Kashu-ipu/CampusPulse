@@ -28,10 +28,40 @@
             <button type="submit">Submit Issue</button>
         </form>
 
+        <hr>
+
+    <!-- Filters -->
+        <h3>Filter Issues</h3>
+        <select id="filterSeverity">
+            <option value="All">All</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+        </select>
+        <button onclick="applyFilter()">Apply Filter</button>
+
+        <hr>
+
+        <!-- Issue Table -->
         <h3>Submitted Issues</h3>
-        <div id="issueList"></div>
+
+        <table border="1" width="100%">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Severity</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody id="issueBody">
+            </tbody>
+        </table>
+
     </div>
 
+
     <script src="main.js"></script>
+
 </body>
 </html>
