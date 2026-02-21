@@ -1,8 +1,6 @@
 let issues = JSON.parse(localStorage.getItem("issues")) || [];
-// Get logged-in department
-let loggedInDept = localStorage.getItem("loggedInDept");
 
-// Show department name on page
+let loggedInDept = localStorage.getItem("loggedInDept");
 document.getElementById("deptName").textContent = loggedInDept;
 
 // Filter issues by department
@@ -10,10 +8,8 @@ function filterByDepartment(issueArray, department) {
     return issueArray.filter(issue => issue.category === department);
 }
 
-// Filter issues by department (DSA function call)
 let deptIssues = filterByDepartment(issues, loggedInDept);
 
-// Apply sorting (DSA function call)
 deptIssues = sortByPriority(deptIssues);
 
 
@@ -36,6 +32,7 @@ function displayIssues() {
                 <button onclick="updateStatus('${issue.title}', 'Pending')">Pending</button>
                 <button onclick="updateStatus('${issue.title}', 'In Progress')">In Progress</button>
                 <button onclick="updateStatus('${issue.title}', 'Resolved')">Mark Resolved</button>
+                <button onclick="upvoteIssue(${issue.id})">⬆ Upvote (${issue.upvotes})</button>
             </div>
         `;
     });
@@ -47,12 +44,17 @@ function updateStatus(title, newStatus) {
 
     let issueToUpdate = issues.find(issue => issue.title === title);
 
-    if (issueToUpdate) {
-        issueToUpdate.status = newStatus;
+        if (issueToUpdate) {
+
+        // If department marks resolved → Await confirmation
+        if (newStatus === "Resolved") {
+            issueToUpdate.status = "Awaiting Confirmation";
+        } else {
+            issueToUpdate.status = newStatus;
+        }
     }
 
     localStorage.setItem("issues", JSON.stringify(issues));
-
     displayIssues();
 }
 
