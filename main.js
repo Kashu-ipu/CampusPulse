@@ -13,25 +13,6 @@
 let issues = JSON.parse(localStorage.getItem("issues")) || [];
 
 /* =========================
-   DSA PART - Priority Logic
-========================= */
-
-// Priority Calculation Function
-function calculatePriority(severity) {
-    const priorityScore = {
-        "High": 3,
-        "Medium": 2,
-        "Low": 1
-    };
-    return priorityScore[severity];
-}
-
-// Sorting Function (Descending Order)
-function sortByPriority(issueArray) {
-    return issueArray.sort((a, b) => b.score - a.score);
-}
-
-/* =========================
    FORM SUBMIT LOGIC
 ========================= */
 
@@ -49,7 +30,8 @@ document.getElementById("issueForm").addEventListener("submit", function(e) {
         category,
         severity,
         upvotes: 0,
-        score: calculatePriority(severity)
+        score: calculatePriority(severity) + upvotes,
+        status: "Pending"
     };
         
 
