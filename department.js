@@ -1,6 +1,6 @@
 let issues = JSON.parse(localStorage.getItem("issues")) || [];
 
-let loggedInDept = localStorage.getItem("loggedInDept");
+let loggedInDept = localStorage.getItem("loggedInDept") || "DefaultDept";
 document.getElementById("deptName").textContent = loggedInDept;
 
 // Filter issues by department
@@ -9,18 +9,19 @@ function filterByDepartment(issueArray, department) {
 }
 
 let deptIssues = filterByDepartment(issues, loggedInDept);
-
 deptIssues = sortByPriority(deptIssues);
 
+displayIssues(deptIssues);  // pass filtered list
 
-function displayIssues() {
+
+function displayIssues(issueList) {
 
     const container = document.getElementById("issueList");
     const totalCount = document.getElementById("totalCount");
 
     container.innerHTML = "";
 
-    issues.forEach(issue => {
+    issueList.forEach(issue => {
         container.innerHTML += `
             <div class="issue-card">
                 <strong>${issue.title}</strong><br>
@@ -48,14 +49,16 @@ function updateStatus(title, newStatus) {
 
         // If department marks resolved → Await confirmation
         if (newStatus === "Resolved") {
-            issueToUpdate.status = "Awaiting Confirmation";
-        } else {
-            issueToUpdate.status = newStatus;
-        }
+            issueToUpdate.status = (newStatus === "Resolved") ? "Awaiting Confirmation" : newStatus;
+        } 
     }
 
     localStorage.setItem("issues", JSON.stringify(issues));
-    displayIssues();
+    let deptIssues = filterByDepartment(issues, loggedInDept);
+    deptIssues = sortByPriority(deptIssues);
+
+    displayIssues(deptIssues);
+
 }
 
 displayIssues();
