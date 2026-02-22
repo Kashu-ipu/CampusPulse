@@ -27,7 +27,7 @@ function displayIssues(issueList) {
                 <strong>${issue.title}</strong><br>
                 Category: ${issue.category}<br>
                 Severity: ${issue.severity}<br>
-                Score: ${issue.score}
+                Score: ${issue.score}<br>
                 Status: <b>${issue.status || "Pending"}</b><br><br>
 
                 <button onclick="updateStatus('${issue.title}', 'Pending')">Pending</button>
@@ -38,7 +38,7 @@ function displayIssues(issueList) {
         `;
     });
 
-    totalCount.textContent = issues.length;
+    totalCount.textContent = issueList.length;
 }
 
 function updateStatus(title, newStatus) {
@@ -61,4 +61,4 @@ function updateStatus(title, newStatus) {
 
 }
 
-displayIssues();
+displayIssues(deptIssues);
