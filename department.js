@@ -28,12 +28,12 @@ function displayIssues(issueList) {
                 Category: ${issue.category}<br>
                 Severity: ${issue.severity}<br>
                 Score: ${issue.score}<br>
+                Upvotes: ${issue.upvotes}<br>
                 Status: <b>${issue.status || "Pending"}</b><br><br>
 
-                <button onclick="updateStatus('${issue.title}', 'Pending')">Pending</button>
-                <button onclick="updateStatus('${issue.title}', 'In Progress')">In Progress</button>
-                <button onclick="updateStatus('${issue.title}', 'Resolved')">Mark Resolved</button>
-                <button onclick="upvoteIssue(${issue.id})">⬆ Upvote (${issue.upvotes})</button>
+                <button onclick="updateStatus('${issue.id}', 'Pending')">Pending</button>
+                <button onclick="updateStatus('${issue.id}', 'In Progress')">In Progress</button>
+                <button onclick="updateStatus('${issue.id}', 'Resolved')">Mark Resolved</button>
             </div>
         `;
     });
@@ -43,17 +43,20 @@ function displayIssues(issueList) {
 
 function updateStatus(title, newStatus) {
 
-    let issueToUpdate = issues.find(issue => issue.title === title);
+    let issueToUpdate = issues.find(issue => issue.id === id);
 
         if (issueToUpdate) {
 
         // If department marks resolved → Await confirmation
         if (newStatus === "Resolved") {
-            issueToUpdate.status = (newStatus === "Resolved") ? "Awaiting Confirmation" : newStatus;
-        } 
+            issueToUpdate.status = "Awaiting Confirmation";
+        } else {
+            issueToUpdate.status = newStatus;
+        }
     }
 
     localStorage.setItem("issues", JSON.stringify(issues));
+
     let deptIssues = filterByDepartment(issues, loggedInDept);
     deptIssues = sortByPriority(deptIssues);
 
