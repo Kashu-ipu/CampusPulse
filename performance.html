@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Department Performance Dashboard</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Department Performance Dashboard</h2>
+
+    <div class="stats">
+        <div class="card">
+            <h3>Total Assigned</h3>
+            <p id="totalAssigned">0</p>
+        </div>
+
+        <div class="card">
+            <h3>Total Resolved</h3>
+            <p id="totalResolved">0</p>
+        </div>
+
+        <div class="card">
+            <h3>Pending</h3>
+            <p id="totalPending">0</p>
+        </div>
+
+        <div class="card highlight">
+            <h3>Performance Score</h3>
+            <p id="performanceScore">0</p>
+        </div>
+    </div>
+
+    <h3>🏆 Department Leaderboard</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Department</th>
+                <th>Resolved</th>
+                <th>Total</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody id="leaderboardBody"></tbody>
+    </table>
+</div>
+
+<script src="performance.js"></script>
+</body>
+</html>

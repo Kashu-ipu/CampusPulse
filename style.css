@@ -39,16 +39,28 @@ input:focus, select:focus {
 }
 
 
+td button {
+    padding: 6px 10px;
+    font-size: 14px;
+    width: auto;
+    background: #4b2aad;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+td {
+    text-align: center;
+}
+
 button {
     background-color: #341d8a;
     color: white;
     border: none;
     cursor: pointer;
-    margin-left: 30%;
-    margin-top: 5%;
-    padding:10px;
-    width:40%;
-    
+    width: 40%;
 }
 
 button:hover {
@@ -63,3 +75,4 @@ button:hover {
     margin-top: 10px;
     border-radius: 5px;
 }
+

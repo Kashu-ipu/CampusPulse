@@ -2,14 +2,14 @@
 
 // Issue Object Structure:
 // {
-//   id: number,
+//   id: string,
 //   title: string,
 //   category: string,
 //   severity: string,
 //   upvotes: number,
 //   score: number
 // }
-
+let departments = ["Water", "Road", "Hostel", "Electricity"];
 let issues = JSON.parse(localStorage.getItem("issues")) || [];
 
 /* FORM SUBMIT LOGIC */
@@ -23,7 +23,7 @@ document.getElementById("issueForm").addEventListener("submit", function(e) {
     const severity = document.getElementById("severity").value;
 
     const newIssue = {
-        id: Date.now(),
+        id: Date.now().toString(),
         title,
         category,
         severity,
@@ -44,7 +44,9 @@ document.getElementById("issueForm").addEventListener("submit", function(e) {
     document.getElementById("issueForm").reset();
 
     displayIssues(issues); // Refresh table after submit
+    generateLeaderboard();
 });
+
 
 /* DISPLAY LOGIC */
 
@@ -53,12 +55,13 @@ function displayIssues(issueList) {
     tbody.innerHTML = "";
 
     issueList.forEach(issue => {
+
          let actionButtons = "";
          
          if (issue.status === "Awaiting Confirmation") {
             actionButtons = `
-            <button onclick="confirmIssue(${issue.id})">Confirm</button>
-            <button onclick="rejectIssue(${issue.id})">Reject</button>
+            <button onclick="confirmIssue('${issue.id}')">Confirm</button>
+            <button onclick="rejectIssue('${issue.id}')">Reject</button>
         `;
     }
         tbody.innerHTML += `
@@ -67,8 +70,11 @@ function displayIssues(issueList) {
                 <td>${issue.category}</td>
                 <td>${issue.severity}</td>
                 <td>${issue.score}</td>
+                <td>${issue.status}</td>
                 <td>${issue.upvotes}</td>
-                <td><button onclick="upvoteIssue(${issue.id})">👍 Upvote</button></td>
+                <td><button onclick="upvoteIssue(${issue.id})">👍 Upvote</button>
+                ${actionButtons}
+                </td>
             </tr>
         `;
     });
@@ -76,10 +82,10 @@ function displayIssues(issueList) {
 
 function confirmIssue(id) {
 
-    let issue = issues.find(issue => issue.id === id);
+    let issue = issues.find(issue => issue.id == id);
 
     if (issue) {
-        issue.status = "Closed";
+        issue.status = "Resolved";
     }
 
     localStorage.setItem("issues", JSON.stringify(issues));
@@ -88,7 +94,7 @@ function confirmIssue(id) {
 
 function rejectIssue(id) {
 
-    let issue = issues.find(issue => issue.id === id);
+    let issue = issues.find(issue => issue.id == id);
 
     if (issue) {
 
@@ -122,6 +128,7 @@ function upvoteIssue(id) {
         // Save and refresh UI
         localStorage.setItem("issues", JSON.stringify(issues));
         displayIssues(issues);
+        generateLeaderboard();
     }
 }
 
@@ -145,10 +152,71 @@ function applyFilter() {
 }
 
 
-/* INITIAL LOAD */
+//  LEADERBOARD CALCULATION
+function generateLeaderboard() {
 
-sortByPriority(issues);
-displayIssues(issues);
+    let leaderboard = [];
+
+    departments.forEach(dept => {
+
+        let deptIssues = issues.filter(issue => issue.category === dept);
+
+        let total = deptIssues.length;
+        let resolved = deptIssues.filter(issue => issue.status === "Resolved").length;
+
+        let score = total === 0 ? 0 : Math.round((resolved / total) * 100);
+
+        leaderboard.push({
+            department: dept,
+            total,
+            resolved,
+            score
+        });
+    });
+
+    // Sort descending by score
+    leaderboard.sort((a, b) => b.score - a.score);
+
+    displayLeaderboard(leaderboard);
+}
+//  DISPLAY LEADERBOARD
+
+
+function displayLeaderboard(data) {
+
+    let tbody = document.getElementById("leaderboardBody");
+    tbody.innerHTML = "";
+
+    data.forEach((dept, index) => {
+
+        let row = `
+            <tr>
+                <td>${index + 1}</td>
+                <td>${dept.department}</td>
+                <td>${dept.resolved}</td>
+                <td>${dept.total}</td>
+                <td>${dept.score}%</td>
+            </tr>
+        `;
+
+        tbody.innerHTML += row;
+    });
+}
+
+
+/* INITIAL LOAD */
+window.onload = function() {
+    issues = JSON.parse(localStorage.getItem("issues")) || [];
+    // Fix missing status
+    issues = issues.map(issue => {
+        if(!issue.status) issue.status = "Pending";
+        return issue;
+    });
+    sortByPriority(issues);
+    displayIssues(issues);
+    generateLeaderboard();
+};
+
 
 
 
