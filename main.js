@@ -28,7 +28,7 @@ document.getElementById("issueForm").addEventListener("submit", function(e) {
         category,
         severity,
         upvotes: 0,
-        score: calculatePriority(severity) + 0,
+        score: calculatePriority(severity, 0), 
         status: "Pending"
     };
         
@@ -67,6 +67,8 @@ function displayIssues(issueList) {
                 <td>${issue.category}</td>
                 <td>${issue.severity}</td>
                 <td>${issue.score}</td>
+                <td>${issue.upvotes}</td>
+                <td><button onclick="upvoteIssue(${issue.id})">👍 Upvote</button></td>
             </tr>
         `;
     });
@@ -113,17 +115,16 @@ function upvoteIssue(id) {
         issue.upvotes += 1;
 
         // Recalculate score: severity-based + upvotes
-        issue.score = calculatePriority(issue.severity) + issue.upvotes;
+        issue.score = calculatePriority(issue.severity, issue.upvotes);
 
-        // Re-sort issues by updated score
-        let deptIssues = filterByDepartment(issues, loggedInDept);
-        deptIssues = sortByPriority(deptIssues);
-
+         sortByPriority(issues);
+         
         // Save and refresh UI
         localStorage.setItem("issues", JSON.stringify(issues));
-        displayIssues(deptIssues);
+        displayIssues(issues);
     }
 }
+
 
 /* FILTER LOGIC */
 
