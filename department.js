@@ -41,9 +41,11 @@ function displayIssues(issueList) {
     totalCount.textContent = issueList.length;
 }
 
-function updateStatus(title, newStatus) {
+function updateStatus(id, newStatus) {
 
-    let issueToUpdate = issues.find(issue => issue.id === id);
+    console.log("Clicked:", id, newStatus);
+
+    let issueToUpdate = issues.find(issue => issue.id == id);
 
         if (issueToUpdate) {
 
@@ -62,6 +64,10 @@ function updateStatus(title, newStatus) {
 
     displayIssues(deptIssues);
 
+}
+
+function goToPerformance() {
+    window.location.href = "performance.html";
 }
 
 displayIssues(deptIssues);
