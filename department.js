@@ -27,6 +27,11 @@ function displayIssues(issueList) {
                 <strong>${issue.title}</strong><br>
                 Category: ${issue.category}<br>
                 Severity: ${issue.severity}<br>
+
+                <p><strong>Student:</strong> ${issue.studentName || "Not Provided"}</p>
+                <p><strong>Block:</strong> ${issue.block || "Not Provided"}</p>
+                <p><strong>Location:</strong> ${issue.specificLocation || "Not Provided"}</p>
+                
                 Score: ${issue.score}<br>
                 Upvotes: ${issue.upvotes}<br>
                 Status: <b>${issue.status || "Pending"}</b><br><br>

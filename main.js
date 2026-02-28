@@ -21,12 +21,18 @@ document.getElementById("issueForm").addEventListener("submit", function(e) {
     const title = document.getElementById("title").value;
     const category = document.getElementById("category").value;
     const severity = document.getElementById("severity").value;
+    const studentName = document.getElementById("studentName").value;
+    const block = document.getElementById("block").value;
+    const specificLocation = document.getElementById("specificLocation").value;
 
     const newIssue = {
         id: Date.now().toString(),
         title,
         category,
         severity,
+        studentName,
+        block,
+        specificLocation,
         upvotes: 0,
         score: calculatePriority(severity, 0), 
         status: "Pending"
